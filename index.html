@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Dao of PAO — Smarter Work. Sharper Thinking. Better Outcomes.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+SC:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0d0b;
+    --ink-soft: #1a1814;
+    --parchment: #f2ead8;
+    --parchment-dim: #c9bc9e;
+    --gold: #b8902a;
+    --gold-light: #d4a843;
+    --red-seal: #8b2020;
+    --mist: rgba(242,234,216,0.06);
+    --mist-strong: rgba(242,234,216,0.12);
+    --brush: #2a2520;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--ink);
+    color: var(--parchment);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.35;
+  }
+
+  /* ── NAVIGATION ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.4rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(14,13,11,0.95) 0%, transparent 100%);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    text-decoration: none;
+  }
+
+  .nav-cta {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--parchment);
+    text-decoration: none;
+    border: 1px solid rgba(242,234,216,0.3);
+    padding: 0.5rem 1.4rem;
+    transition: all 0.3s ease;
+  }
+
+  .nav-cta:hover {
+    background: var(--mist-strong);
+    border-color: var(--gold);
+    color: var(--gold-light);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 6rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Ink wash background */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 70% at 80% 50%, rgba(42,37,32,0.6) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 50% at 20% 80%, rgba(184,144,42,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-text {
+    position: relative;
+    z-index: 2;
+    max-width: 560px;
+  }
+
+  .eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--parchment);
+    margin-bottom: 0.3rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-pao-meaning {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--parchment-dim);
+    margin-bottom: 2rem;
+    padding-left: 0.1rem;
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--parchment-dim);
+    line-height: 1.75;
+    max-width: 440px;
+    margin-bottom: 2.8rem;
+  }
+
+  /* ── SIGNUP FORM ── */
+  .signup-form {
+    display: flex;
+    gap: 0;
+    max-width: 440px;
+    border: 1px solid rgba(184,144,42,0.4);
+    background: rgba(14,13,11,0.6);
+  }
+
+  .signup-form input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0.9rem 1.2rem;
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    color: var(--parchment);
+    letter-spacing: 0.02em;
+  }
+
+  .signup-form input::placeholder {
+    color: rgba(201,188,158,0.45);
+    font-style: italic;
+  }
+
+  .signup-form button {
+    background: var(--gold);
+    border: none;
+    padding: 0.9rem 1.6rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.25s ease;
+    white-space: nowrap;
+  }
+
+  .signup-form button:hover {
+    background: var(--gold-light);
+  }
+
+  .form-note {
+    margin-top: 0.7rem;
+    font-size: 0.78rem;
+    color: rgba(201,188,158,0.45);
+    letter-spacing: 0.05em;
+    font-style: italic;
+  }
+
+  /* ── ENSO CIRCLE ── */
+  .hero-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .enso-wrapper {
+    position: relative;
+    width: 420px;
+    height: 420px;
+  }
+
+  .enso-ring {
+    position: absolute;
+    inset: 0;
+    animation: enso-breathe 6s ease-in-out infinite;
+  }
+
+  .enso-ring svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .enso-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem;
+  }
+
+  .enso-kanji {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 3.5rem;
+    color: var(--gold);
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+    animation: enso-breathe 6s ease-in-out infinite;
+    animation-delay: 0.5s;
+  }
+
+  .enso-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--parchment-dim);
+    line-height: 1.8;
+  }
+
+  /* Orbiting dots */
+  .orbit-dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+  .orbit-dot-1 { animation: orbit1 12s linear infinite; top: 50%; left: 50%; }
+  .orbit-dot-2 { animation: orbit2 18s linear infinite; top: 50%; left: 50%; opacity: 0.2; }
+
+  @keyframes orbit1 {
+    from { transform: translate(-50%, -50%) rotate(0deg) translateX(210px); }
+    to   { transform: translate(-50%, -50%) rotate(360deg) translateX(210px); }
+  }
+  @keyframes orbit2 {
+    from { transform: translate(-50%, -50%) rotate(120deg) translateX(200px); }
+    to   { transform: translate(-50%, -50%) rotate(480deg) translateX(200px); }
+  }
+  @keyframes enso-breathe {
+    0%, 100% { opacity: 0.85; transform: scale(1); }
+    50%       { opacity: 1; transform: scale(1.015); }
+  }
+
+  /* ── SECTION SHARED ── */
+  section {
+    position: relative;
+    padding: 6rem 3rem;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-eyebrow::after {
+    content: '';
+    display: block;
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--parchment);
+    margin-bottom: 1.2rem;
+  }
+
+  h2 em { color: var(--gold-light); font-style: italic; }
+
+  /* ── BRUSHSTROKE DIVIDER ── */
+  .brush-divider {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, rgba(184,144,42,0.3) 20%, rgba(184,144,42,0.3) 80%, transparent);
+    margin: 0;
+    position: relative;
+  }
+
+  .brush-divider::after {
+    content: '◆';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--ink);
+    padding: 0 0.8rem;
+    color: var(--gold);
+    font-size: 0.5rem;
+    opacity: 0.6;
+  }
+
+  /* ── KOAN / QUOTE SECTION ── */
+  .koan-section {
+    background: var(--ink-soft);
+    padding: 5rem 3rem;
+  }
+
+  .koan-block {
+    max-width: 780px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+  }
+
+  .koan-block::before {
+    content: '❝';
+    display: block;
+    font-size: 4rem;
+    color: var(--gold);
+    opacity: 0.15;
+    line-height: 1;
+    margin-bottom: -1.5rem;
+    font-family: Georgia, serif;
+  }
+
+  .koan-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--parchment);
+    margin-bottom: 1.5rem;
+  }
+
+  .koan-attribution {
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.7;
+  }
+
+  /* ── PILLARS ── */
+  .pillars-section { background: var(--ink); }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 3.5rem;
+    border: 1px solid rgba(184,144,42,0.15);
+  }
+
+  .pillar {
+    padding: 2.8rem 2.2rem;
+    border-right: 1px solid rgba(184,144,42,0.12);
+    position: relative;
+    transition: background 0.3s ease;
+  }
+
+  .pillar:last-child { border-right: none; }
+
+  .pillar:hover { background: var(--mist); }
+
+  .pillar-number {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 2.5rem;
+    color: var(--gold);
+    opacity: 0.2;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .pillar-glyph {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .pillar h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--parchment);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .pillar-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.7;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .pillar p {
+    font-size: 0.95rem;
+    color: var(--parchment-dim);
+    line-height: 1.75;
+  }
+
+  .pillar-tag {
+    display: inline-block;
+    margin-top: 1.2rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid rgba(184,144,42,0.25);
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* ── YIN/YANG SECTION ── */
+  .balance-section {
+    background: var(--ink-soft);
+    overflow: hidden;
+  }
+
+  .balance-grid {
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr;
+    gap: 2rem;
+    align-items: center;
+    margin-top: 3.5rem;
+  }
+
+  .balance-side {
+    padding: 2.5rem;
+    border: 1px solid rgba(242,234,216,0.06);
+    position: relative;
+  }
+
+  .balance-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .balance-label.yang { color: var(--gold-light); }
+  .balance-label.yin  { color: #6fa3b5; }
+
+  .balance-label::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .balance-items {
+    list-style: none;
+  }
+
+  .balance-items li {
+    font-size: 0.95rem;
+    color: var(--parchment-dim);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(242,234,216,0.05);
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+  }
+
+  .balance-items li::before {
+    content: '—';
+    color: var(--gold);
+    opacity: 0.3;
+    flex-shrink: 0;
+  }
+
+  .balance-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .yin-yang-symbol {
+    font-size: 2.5rem;
+    opacity: 0.7;
+    animation: rotate-slow 20s linear infinite;
+  }
+
+  @keyframes rotate-slow {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  .balance-connector {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--parchment-dim);
+    text-align: center;
+    opacity: 0.5;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+  }
+
+  /* ── WHAT YOU GET ── */
+  .get-section { background: var(--ink); }
+
+  .get-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+
+  .get-card {
+    padding: 2rem 2rem;
+    border: 1px solid rgba(184,144,42,0.12);
+    position: relative;
+    transition: border-color 0.3s ease;
+  }
+
+  .get-card:hover { border-color: rgba(184,144,42,0.35); }
+
+  .get-card-icon {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .get-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--parchment);
+    margin-bottom: 0.5rem;
+  }
+
+  .get-card p {
+    font-size: 0.92rem;
+    color: var(--parchment-dim);
+    line-height: 1.7;
+  }
+
+  .get-card-corner {
+    position: absolute;
+    top: -1px; right: -1px;
+    width: 20px; height: 20px;
+    border-top: 2px solid var(--gold);
+    border-right: 2px solid var(--gold);
+    opacity: 0.4;
+  }
+
+  /* ── FOR WHO ── */
+  .forwhom-section { background: var(--ink-soft); }
+
+  .audience-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 3rem;
+    max-width: 700px;
+  }
+
+  .audience-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 1rem;
+    border-left: 2px solid rgba(184,144,42,0.2);
+  }
+
+  .audience-check {
+    color: var(--gold);
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+
+  .audience-item span {
+    font-size: 0.95rem;
+    color: var(--parchment-dim);
+    line-height: 1.5;
+  }
+
+  /* ── SAMPLE ISSUE ── */
+  .sample-section { background: var(--ink); }
+
+  .sample-issue {
+    max-width: 680px;
+    margin: 3.5rem auto 0;
+    border: 1px solid rgba(184,144,42,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sample-issue::before {
+    content: 'SAMPLE ISSUE';
+    position: absolute;
+    top: 1rem; right: 1rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    opacity: 0.4;
+    border: 1px solid rgba(184,144,42,0.3);
+    padding: 0.2rem 0.5rem;
+  }
+
+  .issue-header {
+    background: var(--ink-soft);
+    padding: 1.8rem 2.2rem;
+    border-bottom: 1px solid rgba(184,144,42,0.1);
+  }
+
+  .issue-meta {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+    margin-bottom: 0.5rem;
+  }
+
+  .issue-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--parchment);
+  }
+
+  .issue-body {
+    padding: 2rem 2.2rem;
+  }
+
+  .issue-segment {
+    margin-bottom: 1.8rem;
+    padding-bottom: 1.8rem;
+    border-bottom: 1px solid rgba(242,234,216,0.06);
+  }
+
+  .issue-segment:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .segment-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .segment-label.efficiency { color: #d4a843; }
+  .segment-label.caution    { color: #b56060; }
+  .segment-label.dao        { color: #7aaa8a; }
+
+  .segment-label .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+  }
+
+  .issue-segment p {
+    font-size: 0.92rem;
+    color: var(--parchment-dim);
+    line-height: 1.75;
+  }
+
+  /* ── FINAL CTA ── */
+  .cta-section {
+    background: var(--ink-soft);
+    text-align: center;
+    padding: 7rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(184,144,42,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-section h2 {
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .cta-section .hero-sub {
+    margin: 0 auto 2.5rem;
+    max-width: 500px;
+    text-align: center;
+  }
+
+  .cta-form {
+    display: flex;
+    gap: 0;
+    max-width: 440px;
+    margin: 0 auto;
+    border: 1px solid rgba(184,144,42,0.4);
+    background: rgba(14,13,11,0.6);
+  }
+
+  .cta-form input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 1rem 1.2rem;
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    color: var(--parchment);
+  }
+
+  .cta-form input::placeholder {
+    color: rgba(201,188,158,0.4);
+    font-style: italic;
+  }
+
+  .cta-form button {
+    background: var(--gold);
+    border: none;
+    padding: 1rem 1.8rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.25s;
+    white-space: nowrap;
+  }
+
+  .cta-form button:hover { background: var(--gold-light); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    padding: 2.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(184,144,42,0.1);
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .footer-note {
+    font-size: 0.78rem;
+    color: rgba(201,188,158,0.3);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── FADE IN ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .fade-up-delay-1 { animation-delay: 0.15s; }
+  .fade-up-delay-2 { animation-delay: 0.3s; }
+  .fade-up-delay-3 { animation-delay: 0.45s; }
+  .fade-up-delay-4 { animation-delay: 0.6s; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SEAL ── */
+  .seal {
+    display: inline-block;
+    width: 44px; height: 44px;
+    border: 2px solid var(--red-seal);
+    background: rgba(139,32,32,0.1);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1rem;
+    color: var(--red-seal);
+    opacity: 0.7;
+    transform: rotate(-8deg);
+    flex-shrink: 0;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+      text-align: center;
+      padding-top: 8rem;
+    }
+
+    .hero-text { max-width: 100%; }
+    .eyebrow { justify-content: center; }
+    .eyebrow::before { display: none; }
+    .signup-form { margin: 0 auto; }
+    .hero-visual { margin-top: 3rem; }
+    .enso-wrapper { width: 280px; height: 280px; }
+
+    .pillars-grid { grid-template-columns: 1fr; }
+    .pillar { border-right: none; border-bottom: 1px solid rgba(184,144,42,0.12); }
+    .pillar:last-child { border-bottom: none; }
+
+    .balance-grid { grid-template-columns: 1fr; }
+    .balance-center { display: none; }
+
+    .get-grid { grid-template-columns: 1fr; }
+    .audience-list { grid-template-columns: 1fr; }
+
+    nav { padding: 1.2rem 1.5rem; }
+    section { padding: 4rem 1.5rem; }
+    .koan-section { padding: 4rem 1.5rem; }
+    .cta-section { padding: 5rem 1.5rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#" class="nav-logo">The Dao of PAO</a>
+  <a href="#subscribe" class="nav-cta">Subscribe Free</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="eyebrow fade-up">A Weekly Dispatch for Knowledge Workers</p>
+    <h1 class="fade-up fade-up-delay-1">The Dao<br>of <em>PAO</em></h1>
+    <p class="hero-pao-meaning fade-up fade-up-delay-1">Performance · Awareness · Outcomes</p>
+    <p class="hero-sub fade-up fade-up-delay-2">
+      Most productivity advice is opinion dressed as wisdom. This newsletter cuts through the noise — tools, mindset, strategy, and yes, AI — with the rigor of someone who has spent 20 years proving what actually works.
+    </p>
+    <div class="signup-form fade-up fade-up-delay-3">
+      <input type="email" placeholder="Your email address…" />
+      <button type="button">Begin</button>
+    </div>
+    <p class="form-note fade-up fade-up-delay-4">Free. Weekly. No noise — only wisdom.</p>
+  </div>
+  <div class="hero-visual fade-up fade-up-delay-2">
+    <div class="enso-wrapper">
+      <div class="enso-ring">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="ringGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#b8902a" stop-opacity="0.0"/>
+              <stop offset="75%" stop-color="#b8902a" stop-opacity="0.0"/>
+              <stop offset="85%" stop-color="#b8902a" stop-opacity="0.6"/>
+              <stop offset="95%" stop-color="#d4a843" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#b8902a" stop-opacity="0.3"/>
+            </radialGradient>
+          </defs>
+          <!-- Main enso arc — open circle, slightly imperfect like a brush stroke -->
+          <circle cx="100" cy="100" r="82"
+            fill="none"
+            stroke="url(#ringGrad)"
+            stroke-width="8"
+            stroke-linecap="round"
+            stroke-dasharray="470 45"
+            stroke-dashoffset="-10"
+            opacity="0.85"/>
+          <!-- Inner subtle ring -->
+          <circle cx="100" cy="100" r="70"
+            fill="none"
+            stroke="#b8902a"
+            stroke-width="0.5"
+            opacity="0.15"
+            stroke-dasharray="400 40"/>
+          <!-- Outer glow ring -->
+          <circle cx="100" cy="100" r="94"
+            fill="none"
+            stroke="#b8902a"
+            stroke-width="0.5"
+            opacity="0.08"/>
+        </svg>
+      </div>
+      <div class="orbit-dot orbit-dot-1"></div>
+      <div class="orbit-dot orbit-dot-2"></div>
+      <div class="enso-inner">
+        <div class="enso-kanji">道</div>
+        <div class="enso-tagline">The Way<br>of Wise Work</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="brush-divider"></div>
+
+<!-- KOAN -->
+<section class="koan-section">
+  <div class="koan-block">
+    <p class="koan-text">"Everyone is optimizing tactics. Almost nobody has a strategy. And without strategy, all the tools, systems, and shortcuts in the world are just well-executed wandering."</p>
+    <p class="koan-attribution">— The Dao of PAO</p>
+  </div>
+</section>
+
+<div class="brush-divider"></div>
+
+<!-- THREE PILLARS -->
+<section class="pillars-section">
+  <div class="container">
+    <p class="section-eyebrow">The Three Pillars</p>
+    <h2>What PAO <em>Stands For</em></h2>
+    <p style="color:var(--parchment-dim); max-width:580px; margin-top: 0.5rem;">Each issue explores one dimension of the PAO framework — rotating like the seasons, returning like the tide.</p>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-number">一</div>
+        <span class="pillar-glyph">⚡</span>
+        <h3>Performance</h3>
+        <span class="pillar-sub">The Yang — Speed &amp; Execution</span>
+        <p>The tools, workflows, systems and habits that make your work faster and sharper. Practical and tested — not theoretical frameworks borrowed from someone else's morning routine.</p>
+        <span class="pillar-tag">Do more with less</span>
+      </div>
+      <div class="pillar">
+        <div class="pillar-number">二</div>
+        <span class="pillar-glyph">🎯</span>
+        <h3>Awareness</h3>
+        <span class="pillar-sub">The Bridge — Strategy &amp; Clarity</span>
+        <p>Speed without direction is just expensive noise. We cut through popular assumptions to find what's actually true — about your work, your tools, your strategy, and where your time is really going.</p>
+        <span class="pillar-tag">See what others miss</span>
+      </div>
+      <div class="pillar">
+        <div class="pillar-number">三</div>
+        <span class="pillar-glyph">☯️</span>
+        <h3>Outcomes</h3>
+        <span class="pillar-sub">The Yin — Wisdom &amp; Discernment</span>
+        <p>The rarest skill: knowing which things actually move the needle and which things just feel productive. Not every problem needs a new tool. Not every tool deserves your time.</p>
+        <span class="pillar-tag">Know what actually matters</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="brush-divider"></div>
+
+<!-- YIN / YANG BALANCE -->
+<section class="balance-section">
+  <div class="container">
+    <p class="section-eyebrow">The Central Tension</p>
+    <h2>Not Another Opinion.<br><em>A Standard of Evidence.</em></h2>
+    <div class="balance-grid">
+      <div class="balance-side">
+        <div class="balance-label yang">What Most Advice Looks Like</div>
+        <ul class="balance-items">
+          <li>Confident claims with no evidence</li>
+          <li>Best practices nobody has tested</li>
+          <li>Tool recommendations driven by hype</li>
+          <li>Productivity systems built for someone else's life</li>
+          <li>AI as the answer to every question</li>
+          <li>Strategy confused with a to-do list</li>
+        </ul>
+      </div>
+      <div class="balance-center">
+        <div class="yin-yang-symbol">☯</div>
+        <div class="balance-connector">Discernment</div>
+      </div>
+      <div class="balance-side">
+        <div class="balance-label yin">What the Dao of PAO Delivers</div>
+        <ul class="balance-items">
+          <li>Ideas stress-tested against reality</li>
+          <li>Honest verdicts on what actually works</li>
+          <li>Tools covered when they earn it — not before</li>
+          <li>Systems built around how knowledge work actually happens</li>
+          <li>AI as one tool among many — used with judgment</li>
+          <li>Strategy as the foundation everything else is built on</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="brush-divider"></div>
+
+<!-- WHAT YOU GET -->
+<section class="get-section">
+  <div class="container">
+    <p class="section-eyebrow">Each Week</p>
+    <h2>What Arrives in<br><em>Your Inbox</em></h2>
+    <div class="get-grid">
+      <div class="get-card">
+        <div class="get-card-corner"></div>
+        <span class="get-card-icon">⚡</span>
+        <h4>The Workflow</h4>
+        <p>A specific, actionable system you can apply to your work this week. Could be an AI approach, a meeting structure, a decision framework, or a thinking tool. Practical and sequenced — not a list of vague tips.</p>
+      </div>
+      <div class="get-card">
+        <div class="get-card-corner"></div>
+        <span class="get-card-icon">🔍</span>
+        <h4>The Stress Test</h4>
+        <p>A popular belief about work, productivity, strategy or technology — examined honestly. Some hold up. Many don't. You'll know the difference, and more importantly, you'll know why.</p>
+      </div>
+      <div class="get-card">
+        <div class="get-card-corner"></div>
+        <span class="get-card-icon">☯️</span>
+        <h4>The Balance</h4>
+        <p>The trade-off most people skip. Every approach has a shadow side — a cost, a risk, a condition where it fails. We don't hide that. Knowing the limits of a tool is as valuable as knowing how to use it.</p>
+      </div>
+      <div class="get-card">
+        <div class="get-card-corner"></div>
+        <span class="get-card-icon">道</span>
+        <h4>The Koan</h4>
+        <p>One sentence to carry into the week. Distilled from 20 years of watching what separates the knowledge workers who compound their advantage from those who stay busy without moving forward.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="brush-divider"></div>
+
+<!-- SAMPLE ISSUE -->
+<section class="sample-section">
+  <div class="container">
+    <p class="section-eyebrow">A Taste</p>
+    <h2>From a Recent<br><em>Issue</em></h2>
+    <div class="sample-issue">
+      <div class="issue-header">
+        <p class="issue-meta">Issue No. 07 · The Strategy Edition</p>
+        <p class="issue-title">Your Team Doesn't Have a Strategy. It Has a To-Do List.</p>
+      </div>
+      <div class="issue-body">
+        <div class="issue-segment">
+          <p class="segment-label efficiency"><span class="dot"></span> The Workflow</p>
+          <p>Before your next quarterly planning session, run a one-page strategy pressure test. Write down your top three priorities, then answer: what does each one build toward? If you can't connect each priority to a single north star outcome, you don't have a strategy — you have a collection of good ideas competing for the same resources.</p>
+        </div>
+        <div class="issue-segment">
+          <p class="segment-label caution"><span class="dot"></span> The Stress Test</p>
+          <p>Most companies call their roadmap a strategy. Most managers call their OKRs a strategy. They aren't. A strategy is a set of choices about where to play and how to win — and critically, what you will NOT do. Without that last part, every priority is equally important, which means nothing is actually a priority.</p>
+        </div>
+        <div class="issue-segment">
+          <p class="segment-label dao"><span class="dot"></span> The Balance</p>
+          <p>AI, tools, and better workflows can only accelerate what already has direction. Speed without strategy is just arriving at the wrong destination faster. Fix the direction first. The tools come after.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="brush-divider"></div>
+
+<!-- FOR WHOM -->
+<section class="forwhom-section">
+  <div class="container">
+    <p class="section-eyebrow">Who This Is For</p>
+    <h2>You Do Complex Work.<br><em>You Want to Do It Better.</em></h2>
+    <p style="color:var(--parchment-dim); max-width: 520px; margin-top:0.5rem; margin-bottom: 0;">The Dao of PAO is written for knowledge workers who are tired of consuming advice that sounds smart but doesn't survive contact with Monday morning.</p>
+    <div class="audience-list">
+      <div class="audience-item">
+        <span class="audience-check">✦</span>
+        <span>You're a strategist, analyst, marketer, consultant, operator, or manager doing real work</span>
+      </div>
+      <div class="audience-item">
+        <span class="audience-check">✦</span>
+        <span>You want systems and frameworks — not motivational content or tool reviews</span>
+      </div>
+      <div class="audience-item">
+        <span class="audience-check">✦</span>
+        <span>You suspect you're solving the right problems with the wrong tools — or the wrong problems entirely</span>
+      </div>
+      <div class="audience-item">
+        <span class="audience-check">✦</span>
+        <span>You use AI but want to use it with judgment, not just habit</span>
+      </div>
+      <div class="audience-item">
+        <span class="audience-check">✦</span>
+        <span>You value evidence over authority — you want to know why something works, not just that someone says it does</span>
+      </div>
+      <div class="audience-item">
+        <span class="audience-check">✦</span>
+        <span>You believe working smarter is a discipline, not a productivity hack</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="brush-divider"></div>
+
+<!-- FINAL CTA -->
+<section class="cta-section" id="subscribe">
+  <div style="position:relative; z-index:2;">
+    <p class="section-eyebrow" style="justify-content:center;">Begin the Practice</p>
+    <h2>Join the Readers Who<br><em>Work With Intention</em></h2>
+    <p class="hero-sub">Free. Weekly. Written for the knowledge worker who wants to be genuinely better at their craft — not just busier with better tools.</p>
+    <div class="cta-form">
+      <input type="email" placeholder="Your email address…" />
+      <button type="button">Subscribe Free</button>
+    </div>
+    <p class="form-note" style="text-align:center; margin-top:0.7rem; font-size:0.78rem; color:rgba(201,188,158,0.4); font-style:italic;">No spam. No affiliate links. Cancel anytime.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">The Dao of PAO</div>
+  <div class="footer-note">© 2026 The Dao of PAO · Smarter Work. Sharper Thinking. · thedaoofpao.com</div>
+</footer>
+
+<script>
+  // Intersection observer for scroll-triggered fade-ins on non-hero sections
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.pillar, .get-card, .audience-item, .balance-side').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+
+  // Simple form handler — swap this out for Beehiiv embed
+  document.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const input = this.closest('div').querySelector('input[type="email"]');
+      if (input && input.value.includes('@')) {
+        input.value = '';
+        input.placeholder = '✓ You\'re on the list — first issue coming soon.';
+        this.textContent = '✓';
+        this.style.background = '#2a5c3a';
+      } else if (input) {
+        input.style.borderBottom = '1px solid rgba(180,60,60,0.6)';
+        input.placeholder = 'Please enter a valid email…';
+        setTimeout(() => { input.style.borderBottom = ''; input.placeholder = 'Your email address…'; }, 2000);
+      }
+    });
+  });
+</script>
+</body>
+</html>
