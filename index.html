@@ -925,9 +925,9 @@
     <p class="hero-sub fade-up fade-up-delay-2">
       Most productivity advice is opinion dressed as wisdom. This newsletter cuts through the noise — tools, mindset, strategy, and yes, AI — with the rigor of someone who has spent 20 years proving what actually works.
     </p>
-    <div class="signup-form fade-up fade-up-delay-3">
-      <input type="email" placeholder="Your email address…" />
-      <button type="button">Begin</button>
+    <div class="fade-up fade-up-delay-3" style="max-width:560px;">
+      <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
+      <iframe src="https://subscribe-forms.beehiiv.com/cf53ee62-fa34-495d-af7b-bb73af258c85" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 560px; height: 291px; margin: 0; border-radius: 0px 0px 0px 0px !important; background-color: transparent; box-shadow: 0 0 #0000; max-width: 100%;"></iframe>
     </div>
     <p class="form-note fade-up fade-up-delay-4">Free. Weekly. No noise — only wisdom.</p>
   </div>
@@ -1174,9 +1174,8 @@
     <p class="section-eyebrow" style="justify-content:center;">Begin the Practice</p>
     <h2>Join the Readers Who<br><em>Work With Intention</em></h2>
     <p class="hero-sub">Free. Weekly. Written for the knowledge worker who wants to be genuinely better at their craft — not just busier with better tools.</p>
-    <div class="cta-form">
-      <input type="email" placeholder="Your email address…" />
-      <button type="button">Subscribe Free</button>
+    <div style="max-width:560px; margin: 0 auto;">
+      <iframe src="https://subscribe-forms.beehiiv.com/cf53ee62-fa34-495d-af7b-bb73af258c85" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 560px; height: 291px; margin: 0; border-radius: 0px 0px 0px 0px !important; background-color: transparent; box-shadow: 0 0 #0000; max-width: 100%;"></iframe>
     </div>
     <p class="form-note" style="text-align:center; margin-top:0.7rem; font-size:0.78rem; color:rgba(201,188,158,0.4); font-style:italic;">No spam. No affiliate links. Cancel anytime.</p>
   </div>
@@ -1188,8 +1187,10 @@
   <div class="footer-note">© 2026 The Dao of PAO · Smarter Work. Sharper Thinking. · thedaoofpao.com</div>
 </footer>
 
+<script type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
+
 <script>
-  // Intersection observer for scroll-triggered fade-ins on non-hero sections
+  // Intersection observer for scroll-triggered fade-ins
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1205,23 +1206,6 @@
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
-  });
-
-  // Simple form handler — swap this out for Beehiiv embed
-  document.querySelectorAll('button').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const input = this.closest('div').querySelector('input[type="email"]');
-      if (input && input.value.includes('@')) {
-        input.value = '';
-        input.placeholder = '✓ You\'re on the list — first issue coming soon.';
-        this.textContent = '✓';
-        this.style.background = '#2a5c3a';
-      } else if (input) {
-        input.style.borderBottom = '1px solid rgba(180,60,60,0.6)';
-        input.placeholder = 'Please enter a valid email…';
-        setTimeout(() => { input.style.borderBottom = ''; input.placeholder = 'Your email address…'; }, 2000);
-      }
-    });
   });
 </script>
 </body>
